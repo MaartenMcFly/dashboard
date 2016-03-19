@@ -17,7 +17,7 @@ mongoose.connection.once('connected', function() {
 });
 
 var blobs = [];
-var flag = false;
+var flag = true;
 var i = 0;
 
 function createMeasurement(testName, testTimestamp, testDuration) {
@@ -51,7 +51,7 @@ function aggregateBlobs(err, result, cb) {
 			var p = new Date();
 			p.setDate(p.getDate()-7);
 
-			async.forEachLimit(blobs, 200, function(blob, callback) {				
+			async.forEachLimit(blobs, 20, function(blob, callback) {				
 				blobSvc.getBlobToText(storageContainer, blob.name, function(err, blobContent, blob) {
 					var t;
         				try {
