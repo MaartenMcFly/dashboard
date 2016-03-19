@@ -5,4 +5,6 @@ var MeasurementSchema = new Schema( {
 	testName: String,
 	testTimestamp: Date,
 	testDuration: Number
-}, {timsestamps: true));
+}, {timestamps: true});
+
+module.exports = mongoose.model('Measurement', MeasurementSchema);
