@@ -30,9 +30,9 @@ function createMeasurement(testName, testTimestamp, testDuration) {
 		{
 			console.log(error);
 		}
-		console.log(m + " saved.");
-		return m;
-	});
+		//return m;
+	});i
+	m = null;
 }
 
 function aggregateBlobs(err, result, cb) {
@@ -48,10 +48,7 @@ function aggregateBlobs(err, result, cb) {
 			});
 		} else {
 			console.log("Total: " + blobs.length);
-			var p = new Date();
-			p.setDate(p.getDate()-7);
-
-			async.forEachLimit(blobs, 20, function(blob, callback) {				
+			async.forEachLimit(blobs, 1, function(blob, callback) {				
 				blobSvc.getBlobToText(storageContainer, blob.name, function(err, blobContent, blob) {
 					var t;
         				try {
