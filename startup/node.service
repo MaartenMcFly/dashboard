@@ -1,0 +1,14 @@
+[Unit]
+Description=My API server
+
+[Service]
+ExecStart=/home/ec2-user/repos/dashboard/server.js
+Restart=always
+User=nobody
+Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ec2-user/repos/dashboard
+
+[Install]
+WantedBy=multi-user.target

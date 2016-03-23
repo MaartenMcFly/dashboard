@@ -31,8 +31,8 @@ router.route('/measurements')
 			delete req.query.since;
 			req.query.push({testTimestamp: {$gt: d}});
 		}*/
-		console.log(JSON.stringify(req.query.query));
-		Measurement.find(req.query.query, function (error, measurements) {
+		console.log(JSON.stringify(req.query));
+		Measurement.find(req.query, function (error, measurements) {
 			if (error)
 				res.send(err);
 //			console.log(measurements[0].testTimestamp);
