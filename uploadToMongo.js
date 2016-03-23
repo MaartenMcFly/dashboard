@@ -72,6 +72,7 @@ function aggregateBlobs(err, result, cb) {
 	}
 
 blobSvc.listBlobsSegmented(storageContainer, null, function(err, result){
+	Measurement.remove().exec();
 	aggregateBlobs(err, result, function(err, blobs) {
   		if(!error){
    			console.log("No blobs");
