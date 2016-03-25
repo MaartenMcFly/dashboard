@@ -18,7 +18,7 @@ var query = Measurement.find({testTimestamp: {$gte : p}}).sort({'testTimestamp':
 	if (err)
 		console.error(err);
 	ms.map(function (m) {
-		stream.write(m.testName + ',' + Date.parse(m.testTimestamp) + ',' + m.testDuration + ',' + m.testTimestamp);
+		stream.write(m.testName + ',' + Date.parse(m.testTimestamp) + ',' + m.testDuration + ',' + m.testTimestamp + "\n");
 	});
 	console.log("There are " + ms.length);
 });
