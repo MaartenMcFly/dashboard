@@ -19,12 +19,12 @@ function download(err, token) {
 		console.log(err);
 	bs.listBlobsSegmented(storageContainer, token, function (err, result) {
 		if (err)
-			console.error(err);		
+			console.error(err);	i
+		i += result.entries.length;
+                console.log(i);
+                myBlobs = myBlobs.concat(result.entries);	
 		if (result.continuationToken !== null)
 		{
-			i += result.entries.length;
-			console.log(i);
-			myBlobs = myBlobs.concat(result.entries);
 			download(err, result.continuationToken);
 		} else {
 			console.log("Total: " + i);
@@ -35,7 +35,7 @@ function download(err, token) {
 }
 
 function writeMeasurements() {
-	async.forEachLimit(myBlobs, 20, function(blob, callback) {
+	async.forEachLimit(myBlobs, 100, function(blob, callback) {
 		bs.getBlobToText(storageContainer, blob.name, function(err, blobContent, blob) {
 			stream.write(blobContent);
 		});

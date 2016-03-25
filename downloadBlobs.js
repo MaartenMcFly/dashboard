@@ -35,7 +35,7 @@ function aggregateBlobs(err, result, stream, cb) {
 			p.setDate(p.getDate()-7);
 
 			async.forEachLimit(blobs, 20, function(blob, callback) {				
-			//	if ((new Date(blob.properties["last-modified"])) > p) {
+				if ((new Date(blob.properties["last-modified"])) > p) {
 					blobSvc.getBlobToText(storageContainer, blob.name, function(err, blobContent, blob) {
         					try {
                 					t = JSON.parse(blobContent);
@@ -46,9 +46,9 @@ function aggregateBlobs(err, result, stream, cb) {
 							//stream.write(blobContent );
                 					stream.write(t.availability[0].testName + ',' + Date.parse(t.availability[0].testTimestamp) + ',' + t.availability[0].durationMetric.value / 10000000+ ',' + t.availability[0].testTimestamp + "\n");
         					}	
-        					//t = null;
+        					t = null;
 					});
-				//};
+				};
 				async.setImmediate(function() {
 					callback(null);
 				});}, function(err) {

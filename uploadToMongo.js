@@ -1,10 +1,6 @@
-var storageAccount = 'appsinsight2blob';
-var storageAccessKey = 'Lg2iv9Qg/vrfuusHeX3jOd5h+L44g01HD1csulk7bECnSWfQQk1WRVQUAvq9x3rtxkJ6BD6ZHbfMvSzlFSQZlA==';
-var storageConnectionString = 'DefaultEndpointsProtocol=https;AccountName=appsinsight2blob;AccountKey=Lg2iv9Qg/vrfuusHeX3jOd5h+L44g01HD1csulk7bECnSWfQQk1WRVQUAvq9x3rtxkJ6BD6ZHbfMvSzlFSQZlA==;BlobEndpoint=https://appsinsight2blob.blob.core.windows.net/;TableEndpoint=https://appsinsight2blob.table.core.windows.net/;QueueEndpoint=https://appsinsight2blob.queue.core.windows.net/;FileEndpoint=https://appsinsight2blob.file.core.windows.net/';
-
-var storageContainer = 'appsinsightcontainer'
+var azureConnect = require(__dirname + '/AZURE');
 var azure = require('azure-storage');
-var blobSvc = azure.createBlobService(storageAccount, storageAccessKey);
+var blobSvc = azure.createBlobService(azureConnect.storageAccount, azureConnect.storageAccessKey);
 var mongoose = require('mongoose');
 var Measurement = require(__dirname + '/models/measurement');
 var connectString = 'mongodb://measurementsAdmin:LudHaf97!@52.58.21.162:27000/measurements?authMechanism=SCRAM-SHA-1';
@@ -31,8 +27,7 @@ function createMeasurement(testName, testTimestamp, testDuration) {
 			console.log(err);
 		}
 		//return m;
-	});i
-	m = null;
+	});
 }
 
 function aggregateBlobs(err, result, cb) {
