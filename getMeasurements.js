@@ -7,7 +7,7 @@ var connectString = 'mongodb://measurementsAdmin:LudHaf97!@52.58.21.162:27000/me
 console.log(azureConnect.storageAccount);
 var bs = azure.createBlobService(azureConnect.storageAccount, azureConnect.storageAccessKey);
 var async = require("async");
-var num = 10000;
+var num = 20000;
 mongoose.connect(connectString);
 mongoose.connection.once('connected', function() {
 	console.log("Connected to database.");
@@ -41,7 +41,7 @@ query.exec(function (err, props) {
 	if (err)
 		console.error(err);
 	else {
-		async.forEachLimit(props, 10, function(prop, callback) {
+		async.forEachLimit(props, 200, function(prop, callback) {
 			//props.map(function(prop) {insertMeasurement(prop);});
 			insertMeasurement(prop);
 			async.setImmediate(function() {

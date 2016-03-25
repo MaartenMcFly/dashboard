@@ -11,6 +11,8 @@ mongoose.connection.once('connected', function() {
 	console.log("Connected to database.");
 });
 
+var maxDate = MeasurementProperties.find().sort('testTimestamp': -1).filter(1);
+
 function createMeasurementProperties(blobName, testTimestamp) {
 	var m = new MeasurementProperties();
 	m.blobName = blobName;
