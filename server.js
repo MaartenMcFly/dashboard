@@ -39,6 +39,34 @@ router.route('/measurements')
 			res.json(measurements);
 		});
 	});
+router.route('/measurementslastweek')
+	.get(function(req, res) {
+		var lastWeek = new Date();
+		lastWeek.setDate(lastWeek.getDate()-7);
+		Measurement.find({testName: req.query.testName,
+				  testTimestamp: {$gte: lastWeek}}, function (error, measurements) {
+                        if (error)
+                                res.send(error);
+                        res.json(measurements);
+                });
+        });
+
+router.route('/measurementslastweekascsv')
+        .get(function(req, res) {
+                var lastWeek = new Date();
+                lastWeek.setDate(lastWeek.getDate()-7);
+                Measurement.find({testName: req.query.testName,
+                                  testTimestamp: {$gte: lastWeek}}, function (error, measurements) {
+                        if (error)
+                                res.send(error);
+			var result = "";
+			for (i =0; i < measurements.length; i++) {
+				result += measurements[1].testName +',' + measurements[i].testDuration +',' + measurements[i].testTimestamp.getTime() + "," + measurements[i].testTimestamp + "\n";
+			}
+                        res.send(result);
+                });
+        });
+
 app.use('/api', router);
 app.listen(port);
 
