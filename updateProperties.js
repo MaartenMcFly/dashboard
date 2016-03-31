@@ -20,11 +20,10 @@ function download(err, token) {
 		i += result.entries.length;
 		myBlobs = myBlobs.concat(result.entries);
 		console.log(i);			
-		if (result.continuationToken !== null)
+		if (result.continuationToken !== null )
 		{
 			download(err, result.continuationToken);
 		} else {
-			console.log("Total: " + i);
 			writeBlobProperties();
 		}
 	});
@@ -59,7 +58,10 @@ var query = MeasurementProperties.find().sort({'testTimestamp': -1}).limit(1).ex
 function (err, result) {
 	if (err)
 		console.error(err);
-	timeStamp =(result[0].testTimestamp);;
+	if (result[0])
+		timeStamp =(result[0].testTimestamp);
+	else 
+		timeStamp = new Date("2000-01-01");
 });
 
 download(null, null);
