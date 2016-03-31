@@ -17,12 +17,12 @@ function insertMeasurement(p) {
 	bs.getBlobToText(azureConnect.storageContainer, p.blobName, function(err, blobContent, blob) {
 		a = blobContent.split("\n");
 	 	a.splice(0, a.length - 1).map(function (t) {
-			t = JSON.parse(t);
-			if (t.availability[0].testName) {
+			var q = JSON.parse(t);
+			if (q.availability[0].testName) {
 				var m = new Measurement();
-				m.testName = t.availability[0].testName;
-				m.testTimestamp = t.availability[0].testTimestamp;
-				m.testDuration = t.availability[0].durationMetric.value / 10000000;
+				m.testName = q.availability[0].testName;
+				m.testTimestamp = q.availability[0].testTimestamp;
+				m.testDuration = q.availability[0].durationMetric.value / 10000000;
 				m.save(function (err) {
 					if (err)
 						console.error(err);
@@ -32,10 +32,10 @@ function insertMeasurement(p) {
 					}
 				});
 			}
-		});	
+		});
 	});
 }
-	
+
 var query = MeasurementProperties.find({isUploaded: false}).sort({'testTimestamp':1}).limit(num);
 query.exec(function (err, props) {
 	if (err)

@@ -3,7 +3,7 @@ var Measurement = require(__dirname + '/models/measurement');
 var MeasurementProperties = require(__dirname + '/models/measurementproperties');
 var connectString = 'mongodb://measurementsAdmin:LudHaf97!@52.58.21.162:27000/measurements?authMechanism=SCRAM-SHA-1';
 var fs = require('fs');
-var filename = __dirname + "/measurements.txt";
+var filename = __dirname + "/output.txt";
 
 mongoose.connect(connectString);
 mongoose.connection.once('connected', function() {
